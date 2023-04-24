@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %} {% block title %}Article Detail{% endblock %} 
+{% load crispy_forms_tags %} {% block content %} {% for comment in comments %}
+
+<br>
+<h1>Комментарии к теме  {{ article.topic }}</h1>
+<div class="card mt-2">
+  
+  <div class="card-header"><strong>@{{ comment.author.username }}</strong></div>
+  <div class="card-body d-flex flex-row justify-content-between">
+    <div>
+      <p>{{comment.text}}</p>
+    </div>
+    
+  </div>
+  <div class="card-footer text-muted">{{comment.date}}</div>
+</div>
+{% empty %}
+<p>No comments yet :(</p>
+{% endfor %} 
+<br>
+
+<h3>Make Comment</h3>
+<form method="post">
+  {% csrf_token %}{{form|crispy}}
+  <button type="submit" class="btn btn-success">Post Comment</button>
+</form>
+{% endblock %}

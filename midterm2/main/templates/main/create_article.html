@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %} {% block title %}Create an Article{% endblock %} 
+{% load crispy_forms_tags %} {% block content %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}{{form|crispy}}
+  <select name = "category">
+  {% for category in categories %}
+    <option value = "{{category.id}}">{{category.name}}</option>
+  {% endfor %}
+  </select>
+  <button type="submit" class="btn btn-success">Post</button>
+</form>
+{% endblock %}

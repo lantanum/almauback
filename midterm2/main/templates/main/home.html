@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %} {% block title %}Home Page{% endblock %} 
+{% block content %} {% for article in articles %}
+<div class="card mt-2">
+  <div class="card-header"><strong>@{{ article.author.username }}</strong></div>
+  <div class="card-body d-flex flex-row justify-content-between">
+    <div>
+      <h5 class="card-title">Topic: {{article.topic}}</h5>
+      <h4 class="card-title">Category: {{article.category.name}}</h5>
+      <p>Text: {{article.text}}</p>
+      {% if article.picture %}
+        <img src="{{article.picture.url}}"></img>
+      {% endif %}
+    </div>
+    <div>
+      <a href="/article-detail/{{article.id}}/" class="btn btn-primary">Go</a>
+      {% if user == article.author %}
+      <form method="post">
+        {% csrf_token %}
+        <button
+          type="submit"
+          class="btn btn-danger"
+          name="article-id"
+          value="{{article.id}}"
+        >
+          Delete
+        </button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+  <div class="card-footer text-muted">{{article.date}}</div>
+</div>
+{% empty %}
+<p>No articles yet :(</p>
+
+{% endfor %} {% endblock %}
