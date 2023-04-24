@@ -26,7 +26,7 @@ SECRET_KEY = 'aspectteam'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["lantanum.pythonanywhere.com"]
 
 
 # Application definition
